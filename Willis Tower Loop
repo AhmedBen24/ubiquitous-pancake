@@ -1,0 +1,97 @@
+
+/* ----------------------------------------------------------- 
+    Program 1: Building / * 
+    
+   
+    Author: Ahmed Benchehida
+   -----------------------------------------------------------
+  */
+#include <iostream>   
+#include <iomanip>   
+using namespace std; 
+
+int main()
+{
+    int menuOption = 0; //initilize menuOption
+    int numOfSections = 0; // intialize numOfSections
+    //menu opition
+    cout << "Choose from among the following options:  \n"
+         << "1. Display original graphic  \n"
+         << "2. Display building          \n"
+         << "3. Exit the program          \n"
+         << "Your choice -> ";     
+    
+    cin >> menuOption;
+    cout << endl; 
+       
+    if( menuOption == 3) {
+       //exit if option 3 is clicked
+        exit( 0);
+    }
+    // if option 1 is selected print the UIC ASCII
+    else if( menuOption == 1) {
+      
+        cout << setw( 8) << " ";
+        for( int i=0; i<35; i++) {
+           cout << "*"; // print pattern of astriks
+        }
+        cout << endl;
+        
+        cout << setfill('$') //print patter on dollar signs
+             << setw( 8) << " | " << " ________________________________ \n"
+             << setw( 8) << " | " << "|           _____    _____       |   \n"
+             << setw( 8) << " | " << "| |      |    |      |           |   \n"
+             << setw( 8) << " | " << "| |      |    |      |           |   \n"
+             << setw( 8) << " | " << "| |______|  __|__    |_____      |  \n"
+             << setw( 8) << " | " << "|________________________________| \n"
+             << endl;
+        cout << setw( 8) << " ";
+        for( int i=0; i<35; i++) { //loop to print line of astriks
+            cout << "*";
+        }
+        cout << endl;
+    }
+
+    else if (menuOption == 2) {
+       //if option 2 is selected ask for # of sections
+      cout << "Number of building sections -> " << endl;
+      cin >> numOfSections; // USER input for numOFSections
+      int intialSpacing = numOfSections + 4; //intialSpacing keeps top of tower centered
+        cout << setw(intialSpacing) << "/\\" << endl; // draw top part of tower
+        cout << setw(intialSpacing) << "||" << endl;
+        cout << setw(intialSpacing) << "||" << endl;
+        cout << setw(intialSpacing) << "--" << endl;
+        cout << setw(intialSpacing+1) << "|++|" << endl;
+        cout << setw(intialSpacing+1) << "====" << endl;
+        int spaces = 1; //(space counter)
+            
+      for( int currentSection = 1; currentSection <= numOfSections; currentSection++)  // For loop to count the current sections, to keep tower in order     
+      {
+         int numOfRows = 2*currentSection; //number of rows,(walls for the tower) 
+        
+         for (int currentRow = 1; currentRow <= numOfRows; currentRow++){
+            if( currentRow <= numOfRows/2){
+            //Draw top section of the tower
+               cout << setfill(' ') << setw(3 + (numOfSections-currentSection)) << "|";
+               cout << setw(spaces) << setfill(':')  << "\\" << setfill(':') << setw(numOfRows-(spaces *2)+1) << "/" << setfill(':') << setw(spaces) << "|" << endl;
+               spaces++;
+            }
+            else{
+               //draw bottom section of the tower
+               spaces--;
+               cout << setfill(' ') << setw(3 + (numOfSections-currentSection)) << "|";
+               cout << setw(spaces) << setfill(':') << "/" << setfill(':') << setw(numOfRows-(spaces *2)+1) << "\\" << setfill(':') << setw(spaces) << "|" 
+               << endl;
+            }
+            
+         } 
+         //draw "/--\" charater at the end of each section, using current section to keep organized
+         cout << setfill(' ') << setw(3 + (numOfSections-currentSection)) << "/" << setw((currentSection *2) + 1) << setfill('-')  << "\\" << endl; 
+      }
+       cout  << " " << setw(numOfSections*2 +4) << setfill('.')  << "." << endl;  // # of "." = numOfSections*2 +4
+       cout  << setw(numOfSections*2 +6) << setfill('+')  << '+' << endl; // # of "." = numOfSections*2 +6
+    }
+    
+    cout << endl;
+    return 0;
+}
