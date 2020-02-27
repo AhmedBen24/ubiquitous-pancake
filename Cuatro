@@ -1,0 +1,541 @@
+/* ----------------------------------------------------------- 
+    Program 2: Cauturo 
+    
+    Author: Ahmed Benchehida
+*/
+         ----------------------------------------------------------
+#include <stdio.h> 
+#include <iostream>   // for cin and cout
+#include <iomanip>    // for setw()
+#include <cctype> 
+   // for toupper()
+using namespace std;  // so that we don't need to preface every cin and cout with std::
+
+// Global variables to represent the 16 board pieces and C++ strings representing
+// the pieces that have not yet been played.  Since these are global they don't
+// need to be passed as parameters to functions, and are shared over the entire program.
+// Normally global variables will not be allowed.
+char p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16;
+string upperRowPiecesToPlay = "OO/CC  II/ZZ";
+string lowerRowPiecesToPlay = "oo/cc  ii/zz";
+
+//-------------------------------------------------------------------------------------
+void displayInstructions()
+{
+    cout << "Welcome to the game of Cuatro, where you try to complete a set      \n"
+        << "of four pieces that are alike.  Players take turns making moves.    \n"
+        << "On each move your OPPONENT chooses the piece, then YOU get to       \n"
+        << "place it on the board.  If you create a set of four alike when      \n"
+        << "you place your piece, then you win!       \n"
+        << "\n"
+        << "A set of four alike can be completed by using four all upper (or all\n"
+        << "lower) case characters, four all vowels (or all consonants), or four\n"
+        << "all curved (or all straight-lined). Curved letters are 'O' and 'C'\n"
+        << "(upper or lower), and straight-line letters are 'I' and 'Z' (upper or\n"
+        << "lower). Groups of four can be created in a row, column, diagonal, or\n"
+        << "corner quadrant.\n"
+        << "\n"
+        << "When prompted for input you may also enter 'x' or 'X' to exit." << endl;
+}// end displayInstructions()
+
+void displayBoard() {
+  //diplay board, prints diplay board
+    cout << " ---------    Square #" << endl;
+    cout << "|" << p1 << " " << p2 << " " << p3 << " " << p4 << " |   1 2 3 4" << endl;
+    cout << "|" << p5 << " " << p6 << " " << p7 << " " << p8 << " |   5 6 7 8 " << endl;
+    cout << "|" << p9 << " " << p10 << " " << p11 << " " << p12 << " |   9 10 11 12 " << endl;
+    cout << "|" << p13 << " " << p14 << " " << p15 << " " << p16 << " |  13 14 15 16 " << endl;
+    cout << " --------- \n" << endl;
+    cout << "Pieces:     Curved Straight" << endl;
+    cout << "       Upper: " << upperRowPiecesToPlay << endl;
+    cout << "      Lower: " << lowerRowPiecesToPlay << endl;
+    cout << "            Vowel/Consonant " << endl;
+}
+
+void makeMove(int position, char pieceToMove) {
+    switch (position) {
+      //switch case for pieceToMove, user intput of the variables
+    case 1: p1 = pieceToMove; break;
+    case 2: p2 = pieceToMove; break;
+    case 3: p3 = pieceToMove; break;
+    case 4: p4 = pieceToMove; break;
+    case 5: p5 = pieceToMove; break;
+    case 6: p6 = pieceToMove; break;
+    case 7: p7 = pieceToMove; break;
+    case 8: p8 = pieceToMove; break;
+    case 9: p9 = pieceToMove; break;
+    case 10: p10 = pieceToMove; break;
+    case 11: p11 = pieceToMove; break;
+    case 12: p12 = pieceToMove; break;
+    case 13: p13 = pieceToMove; break;
+    case 14: p14 = pieceToMove; break;
+    case 15: p15 = pieceToMove; break;
+    case 16: p16 = pieceToMove; break;
+    }
+}
+
+// Returns true when occupied
+bool checkOccupied(int position) // checkOccupied take position
+{
+    bool isOccupied = false;
+     switch (position) {
+       // check if p1-p16 is occuppied with a '.'
+     case 1: if (p1 != '.') {
+         isOccupied = true;
+         break;
+     }
+     else { 
+        break;
+     }
+     case 2: if (p2 != '.') {
+         isOccupied = true;
+         break;
+     }
+     else {
+        break;
+     }
+     case 3: if (p3 != '.') {
+         isOccupied = true;
+         break;
+     }
+     else {
+        break;
+     }
+     case 4: if (p4 != '.') {
+         isOccupied = true;
+         break;
+     }
+     else {
+        break;
+     }
+     case 5: if (p5 != '.') {
+         isOccupied = true;
+         break;
+     }
+     else{
+        break;
+     }
+     case 6: if (p6 != '.') {
+         isOccupied = true;
+         break;
+     }
+     else {
+        break;
+     }
+     case 7: if (p7 != '.') {
+         isOccupied = true;
+         break;
+     }
+     else {
+        break;
+     }
+     case 8: if (p8 != '.') {
+         isOccupied = true;
+         break;
+     }
+     else {
+        break;
+     }
+     case 9: if (p9 != '.') {
+         isOccupied = true;
+         break;
+     }
+     else {
+        break;
+     }
+     case 10: if (p10 != '.') {
+         isOccupied = true;
+         break;
+     }
+     else {
+        break;
+     }
+     case 11: if (p11 != '.') {
+         isOccupied = true;
+         break;
+     }
+     else {
+        break;
+     }
+     case 12: if (p12 != '.') {
+         isOccupied = true;
+         break;
+     }
+     else{
+        break;
+     }
+     case 13: if (p13 != '.') {
+         isOccupied = true;
+         break;
+     }
+     else {
+        break;
+     }
+     case 14: if (p14 != '.') {
+         isOccupied = true;
+         break;
+     }
+     else {
+        break;
+     }
+     case 15: if (p15 != '.') {
+         isOccupied = true;
+         break;
+     }
+     else {
+        break;
+     }
+     case 16: if (p16 != '.') {
+         isOccupied = true;
+         break;
+     }
+     else {
+        break;
+     }
+        }
+    return isOccupied;
+}
+
+// Returns true when character found
+bool findAndRemove(char pieceToMove) {
+    int position;
+    // finds character and switches it to ' ' (empty char) if empty returns false
+      if (isupper(pieceToMove)) {
+          if(pieceToMove )
+          position = upperRowPiecesToPlay.find(pieceToMove);
+  
+          // CHaraicter found, replace it
+          if (position != string::npos) {
+              upperRowPiecesToPlay[position] = ' '; //appends upper-case pieceToMove to empty char 
+              return true;
+          } 
+      }
+      else {
+          position = lowerRowPiecesToPlay.find(pieceToMove);
+          if (position != string::npos) {
+              lowerRowPiecesToPlay[position] = ' ';// appends lower case pieceToMove to empty char
+              return true;
+          }
+      }
+      return false;
+}
+
+bool pieceIsValid(char pieceToMove){
+  //checks if userinput for the piece is within the catalog
+   if(pieceToMove == 'z' || pieceToMove == 'Z' || pieceToMove == 'o' || pieceToMove == 'O' || pieceToMove == 'c' || pieceToMove == 'C' || pieceToMove == 'I' || pieceToMove == 'i') {
+      return true;
+   }
+   else {
+      return false;
+   }
+}
+
+void vowelCheck(char d1,char d2, char d3,char d4, bool &winner){
+  int val = 0;
+  // checks which letters in the catalog is a vowel and returns true
+  if(d1 == 'i' || d1 == 'I' || d1 == 'o' || d1 == 'O'  ){
+    val++;
+  }
+  if(d2 == 'i' || d2 == 'I' || d2 == 'o' || d2 == 'O'  ){
+    val++;
+  }
+  if(d3 == 'i' || d3 == 'I' || d3 == 'o' || d3 == 'O'  ){
+    val++;
+  }
+  if(d4 == 'i' || d4 == 'I' || d4 == 'o' || d4 == 'O'  ){
+    val++;
+  }
+  if(val == 4){
+    winner = true;
+  }
+}
+
+void consonantsCheck(char d1,char d2, char d3,char d4, bool &winner){
+  int val = 0;
+  // checks which letters in the catalog is a constant and returns true
+  if(d1 == 'z' || d1 == 'Z' || d1 == 'c' || d1 == 'C'){
+    val++;
+  }
+  if(d2 == 'z' || d2 == 'Z' || d2 == 'c' || d2 == 'C'){
+    val++;
+  }
+  if(d3 == 'z' || d3 == 'Z' || d3 == 'c' || d3 == 'C'){
+    val++;
+  }
+  if(d4 == 'z' || d4 == 'Z' || d4 == 'c' || d4 == 'C'){
+    val++;
+  }
+  if(val == 4){
+    winner = true;
+  }
+}
+
+void checkUpperCase(char d1,char d2, char d3,char d4, bool &winner){
+  int val = 0;
+  //checks if uppercase returns true 
+  if(d1 == 'Z' || d1 == 'C' || d1 == 'I' ||d1 == 'O'){
+    val++;
+  }
+  if(d2 == 'Z' || d2 == 'C' || d2 == 'I' ||d2 == 'O'){
+    val++;
+  }
+  if(d3 == 'Z' || d3 == 'C' || d3 == 'I' ||d3 == 'O'){
+    val++;
+  }
+  if(d4 == 'Z' || d4 == 'C' || d4 == 'I' ||d4 == 'O'){
+    val++;
+  }
+  if(val == 4){
+    winner = true;
+  }
+}
+void checkCurve(char d1,char d2, char d3,char d4, bool &winner){
+  //checks if its curved returns true
+  int val = 0;
+  if(d1 == 'C' || d1 == 'O' || d1 == 'c' || d1 == 'o' ){
+    val++;
+  }
+ if(d2 == 'C' || d2 == 'O' || d2 == 'c' || d2 == 'o' ){
+    val++;
+  }
+ 
+ if(d3 == 'C' || d3 == 'O' || d3 == 'c' || d3 == 'o' ){
+    val++;
+  }
+ 
+ if(d4 == 'C' || d4 == 'O' || d4 == 'c' || d4 == 'o' ){
+    val++;
+  }
+  if(val == 4){
+    winner = true;
+  }
+}
+
+void checkStraight(char d1,char d2, char d3,char d4, bool &winner){
+  //checks if letters is straight
+  int val = 0;
+  if( d1 == 'I'|| d1 == 'i' || d1 == 'Z' || d1 == 'z'){
+    val++;
+  }
+  if( d2 == 'I'|| d2 == 'i' || d2 == 'Z' || d2 == 'z'){
+    val++;
+  }
+  if( d3 == 'I'|| d3 == 'i' || d3 == 'Z' || d3 == 'z'){
+    val++;
+  }
+  if( d4 == 'I'|| d4 == 'i' || d4 == 'Z' || d4 == 'z'){
+    val++;
+  }
+  if(val == 4){
+      winner = true; //checks winner
+    }
+}
+
+void lowerCase(char d1,char d2, char d3,char d4, bool &winner){
+  //checks if lowerCase
+  int val = 0;
+  if(d1 == 'z' || d1 == 'c' || d1 == 'i' || d1 == 'o'){
+    val++;
+  }
+  if(d2 == 'z' || d2 == 'c' || d2 == 'i' || d2 == 'o'){
+    val++;
+  }
+  if(d3 == 'z' || d3 == 'c' || d3 == 'i' || d3 == 'o'){
+    val++;
+  }
+  if(d4 == 'z' || d4 == 'c' || d4 == 'i' || d4 == 'o'){
+    val++;
+  }
+  if(val == 4){
+      winner = true;
+    }
+}
+
+void checkForWin(bool& winner){
+  //checks for winner 
+  
+  //vowel Check for, diagonal, column, row, quadrants
+  vowelCheck(p1, p2,p3,p4, winner);
+  vowelCheck(p5,p6,p7,p8, winner);
+  vowelCheck(p9,p10,p11,p12, winner);
+  vowelCheck(p13,p14,p15,p16, winner);
+  vowelCheck(p1,p5,p9,p15, winner);
+  vowelCheck(p4,p8,p12,p16, winner);
+  vowelCheck(p1,p6,p11,p16, winner);
+  vowelCheck(p4,p7,p10,p13, winner);
+  vowelCheck(p1,p2,p5,p6, winner);
+  vowelCheck(p3,p4,p7,p8, winner);
+  vowelCheck(p9,p10,p13,p14, winner);
+  vowelCheck(p11,p12,p15,p16, winner);
+  vowelCheck(p2,p6,p10,p14, winner);
+  vowelCheck(p1,p5,p9,p13, winner);
+  vowelCheck(p2,p6,p10,p14, winner);
+  vowelCheck(p3,p7,p11,p15, winner);
+  vowelCheck(p4,p8,p12,p16, winner);
+   
+   //consonantsCheck for, diagonal, column, row, quadrants   
+  consonantsCheck(p1,p2,p3,p4, winner);
+  consonantsCheck(p5,p6,p7,p8, winner);
+  consonantsCheck(p9,p10,p11,p12, winner);
+  consonantsCheck(p13,p14,p15,p16, winner);
+  consonantsCheck(p1,p5,p9,p15, winner);
+  consonantsCheck(p4,p8,p12,p16, winner);
+  consonantsCheck(p1,p6,p11,p16, winner);
+  consonantsCheck(p4,p7,p10,p13, winner);
+  consonantsCheck(p1,p2,p5,p6, winner);
+  consonantsCheck(p3,p4,p7,p8, winner);
+  consonantsCheck(p9,p10,p13,p14, winner);
+  consonantsCheck(p11,p12,p15,p16, winner);
+  consonantsCheck(p2,p6,p10,p14, winner);
+  consonantsCheck(p1,p5,p9,p13, winner);
+  consonantsCheck(p2,p6,p10,p14, winner);
+  consonantsCheck(p3,p7,p11,p15, winner);
+  consonantsCheck(p4,p8,p12,p16, winner);
+   
+   //CheckUpperCase for, diagonal, column, row, quadrants    
+  checkUpperCase(p1,p2,p3,p4, winner);
+  checkUpperCase(p5,p6,p7,p8, winner);
+  checkUpperCase(p9,p10,p11,p12, winner);
+  checkUpperCase(p13,p14,p15,p16, winner);
+  checkUpperCase(p1,p5,p9,p15, winner);
+  checkUpperCase(p4,p8,p12,p16, winner);
+  checkUpperCase(p1,p6,p11,p16, winner);
+  checkUpperCase(p4,p7,p10,p13, winner);
+  checkUpperCase(p1,p2,p5,p6, winner);
+  checkUpperCase(p3,p4,p7,p8, winner);
+  checkUpperCase(p9,p10,p13,p14, winner);
+  checkUpperCase(p11,p12,p15,p16, winner);
+  checkUpperCase(p2,p6,p10,p14, winner);
+  checkUpperCase(p1,p5,p9,p13, winner);
+  checkUpperCase(p2,p6,p10,p14, winner);
+  checkUpperCase(p3,p7,p11,p15, winner);
+  checkUpperCase(p4,p8,p12,p16, winner);
+
+   //checkStraight for, diagonal, column, row, quadrants 
+  checkStraight(p1,p2,p3,p4, winner);
+  checkStraight(p5,p6,p7,p8, winner);
+  checkStraight(p9,p10,p11,p12,winner);
+  checkStraight(p13,p14,p15,p16, winner);
+  checkStraight(p1,p5,p9,p15, winner);
+  checkStraight(p4,p8,p12,p16, winner);
+  checkStraight(p1,p6,p11,p16, winner);
+  checkStraight(p4,p7,p10,p13, winner);
+  checkStraight(p1,p2,p5,p6, winner);
+  checkStraight(p3,p4,p7,p8, winner);
+  checkStraight(p9,p10,p13,p14, winner);
+  checkStraight(p11,p12,p15,p16, winner);
+  checkStraight(p2,p6,p10,p14, winner);
+  checkStraight(p1,p5,p9,p13, winner);
+  checkStraight(p2,p6,p10,p14, winner);
+  checkStraight(p3,p7,p11,p15, winner);
+  checkStraight(p4,p8,p12,p16, winner);
+   
+   //checkStraight for, diagonal, column, row, quadrants
+  checkCurve(p1,p2,p3,p4, winner);
+  checkCurve(p5,p6,p7,p8, winner);
+  checkCurve(p9,p10,p11,p12, winner);
+  checkCurve(p13,p14,p15,p16, winner);
+  checkCurve(p1,p5,p9,p15, winner);
+  checkCurve(p4,p8,p12,p16, winner);
+  checkCurve(p1,p6,p11,p16, winner);
+  checkCurve(p4,p7,p10,p13, winner);
+  checkCurve(p1,p2,p5,p6, winner);
+  checkCurve(p3,p4,p7,p8, winner);
+  checkCurve(p9,p10,p13,p14, winner);
+  checkCurve(p11,p12,p15,p16,winner);
+  checkCurve(p2,p6,p10,p14, winner);
+  checkCurve(p1,p5,p9,p13, winner);
+  checkCurve(p2,p6,p10,p14, winner);
+  checkCurve(p3,p7,p11,p15, winner);
+  checkCurve(p4,p8,p12,p16, winner);
+  
+   // CheckLowerCase for, diagonal, column, row, quadrants
+  lowerCase(p1,p2,p3,p4, winner);
+  lowerCase(p5,p6,p7,p8, winner);
+  lowerCase(p9,p10,p11,p12, winner );
+  lowerCase(p13,p14,p15,p16, winner);
+  lowerCase(p1,p5,p9,p15, winner);
+  lowerCase(p4,p8,p12,p16, winner);
+  lowerCase(p1,p6,p11,p16, winner);
+  lowerCase(p4,p7,p10,p13, winner);
+  lowerCase(p1,p2,p5,p6, winner);
+  lowerCase(p3,p4,p7,p8, winner);
+  lowerCase(p9,p10,p13,p14, winner);
+  lowerCase(p11,p12,p15,p16, winner);
+  lowerCase(p2,p6,p10,p14, winner);
+  lowerCase(p1,p5,p9,p13, winner);
+  lowerCase(p2,p6,p10,p14, winner);
+  lowerCase(p3,p7,p11,p15, winner);
+  lowerCase(p4,p8,p12,p16, winner);
+  
+}
+//"-------------------------------------------------------------------------------------------------"
+int main()
+{
+    int position;
+    char pieceToMove;
+    int moveNumber = 1;
+    bool winner = false;
+    int playerWhoWon;
+    p1 = p2 = p3 = p4 = p5 = p6 = p7 = p8 = p9 = p10 = p11 = p12 = p13 = p14 = p15 = p16 = '.';
+    displayInstructions();
+    //GAME LOOP START.
+    while (moveNumber < 17) {
+        displayBoard();
+        if (moveNumber % 2 == 0) { // if divisbale by 2 then it prints player 2 first
+            cout << moveNumber << " . Player 2 enter piece, and Player 1 enter destination: ";
+            playerWhoWon = 1; // updates which player can win
+            
+        }
+        else {
+            cout << moveNumber << " . Player 1 enter piece, and Player 2 enter destination: ";
+             playerWhoWon = 2; // update which player can win, if theres a win.
+        }
+        cin >> pieceToMove;
+        if (pieceToMove == 'x' || pieceToMove == 'X') {
+            cout << " Exiting program...";
+            exit(0); // exits program if enters x
+        }
+
+      cin >> position; // takes in position
+      if(pieceIsValid(pieceToMove)) //checks if piece is valid
+      {
+        if(position >= 1 && position <= 16) //checks if desination is valid
+        {
+         if (!checkOccupied(position)) { //checks occupied 
+            if (findAndRemove(pieceToMove)) {
+              makeMove(position, pieceToMove); // if all test cases pass make move.
+              moveNumber++; // increment move
+              checkForWin(winner);
+              if(winner){
+                displayBoard();
+                cout << "*** Player " << playerWhoWon << " you won!" << endl;
+                break;
+              }
+              if (!winner && moveNumber == 17)
+              {
+                 displayBoard(); // break if no winner after 16 pieces
+                 break;
+              }
+            }
+            else 
+            {
+            cout << "*** Sorry, that is an invalid piece.  Please retry." << endl;
+            }
+         }
+            else {
+              cout <<"*** Sorry, that destination is occupied.  Please retry." << endl;
+            }
+       }
+       else 
+            {
+            cout << "*** Sorry, that destination is invalid.  Please retry." << endl;
+            }
+    }
+      else
+      {
+      cout << "*** Sorry, that is an invalid piece.  Please retry." << endl;
+      }
+  } 
+    return 0;// end main()
+}
