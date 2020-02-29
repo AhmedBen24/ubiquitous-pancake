@@ -1,0 +1,100 @@
+#Manipluate image
+import random
+from PIL import Image, ImageOps
+#open image
+Org_Image = Image.open("pepper.png")
+#establish width,height
+width, height = Org_Image.size
+
+#class IMAGE SPECIAL no arg
+class ImageSpecial:
+  def __init__(self, image):
+    self.image_c = image.copy()
+    #copy image
+  
+  #set_background, args(self,color) creates new image
+  def set_background(self,color):
+    #setbackground arg self,color
+    width, height = self.image_c.size
+    bg_out = Image.new("RGBA", self.image_c.size , color)
+    bg_out.paste(self.image_c, mask = self.image_c)
+    #mask image
+    self.image_c = bg_out
+
+  def remove_color(self, color):
+    width, height = self.image_c.size
+    for x in range(int(width)):
+      for y in range(height):
+        r,g,b,a = self.image_c.getpixel((x,y))
+        if color == "red":
+          r = 0
+        elif color == "green":
+          g = 0
+        elif color == "blue":
+          b = 0
+        self.image_c.putpixel((x,y), (r,g,b,a))
+
+def main():
+  column = random.randrange(6)
+  row = random.randrange(2,6)
+  pic_width = width * column
+  pic_height = height * row
+  pic = Image.new("RGBA", (pic_width, pic_height))
+
+#loop through rows and columns for picture
+  for i in range(column):
+    for j in range(row):
+      #random
+      mod_num = random.randrange(6)
+      image_change = ImageSpecial(Org_Image)
+      paste_x = i * width
+      paste_y = j * height
+#set paste_x and paste_y equal to value of I * width
+      if i == 0 and j == 0:
+        pic.paste(image_change.image_c, (0,0))
+
+      elif mod_num == 0:
+        pic.paste(image_change.image_c, (paste_x, paste_y))
+
+      elif mod_num == 1:
+        r = random.randrange(256)
+        g = random.randrange(256)
+        b = random.randrange(256)
+#call setbackground
+        image_change.set_background((r,g,b))
+        pic.paste(image_change.image_c, (paste_x, paste_y))
+
+      elif mod_num == 2:
+        color_num = random.randrange(2)
+            #REMOVE COLOR CONDITION
+        if color_num == 0:
+          image_change.remove_color("red")
+          pic.paste(image_change.image_c, (paste_x, paste_y))
+
+        elif color_num == 1:
+          image_change.remove_color("green")
+          pic.paste(image_change.image_c, (paste_x, paste_y))
+
+        elif color_num == 2:
+          image_change.remove_color("blue")
+          pic.paste(image_change.image_c, (paste_x, paste_y))
+      
+      elif mod_num == 3:
+        pic.paste(image_change.image_c, (paste_x, paste_y))
+
+      elif mod_num == 4:
+        #Image ops
+        temp_image = image_change.image_c.copy()
+        temp_image = temp_image.convert(("RGB"))
+        temp_image = ImageOps.invert(temp_image)
+        pic.paste(temp_image, (paste_x, paste_y))
+
+      elif mod_num == 5:
+        temp_image_2 = image_change.image_c.copy()
+        temp_image_2 = temp_image_2.convert(("RGB"))
+        temp_image_2 = ImageOps.mirror(temp_image_2)
+        pic.paste(temp_image_2, (paste_x, paste_y))
+#saves Image
+  pic.save("New_Picture.png")
+#save image
+main()
